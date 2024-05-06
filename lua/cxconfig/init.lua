@@ -42,6 +42,7 @@ local function setup(_)
 	autocmd BufNewFile,Bufread *.C   setfiletype cpp
 	autocmd BufNewFile,Bufread *.F setfiletype fortran
 ]])
+  print("cxconfig loaded")
 end
 
 return {
