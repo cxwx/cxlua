@@ -1,5 +1,5 @@
 -- cspell:disable
-local function setup(_)
+local function setup(opts)
   local sysname = vim.loop.os_uname().sysname
   if sysname == "Darwin" then
     vim.g.python_host_prog = "/opt/homebrew/bin/python3"
@@ -42,7 +42,10 @@ local function setup(_)
 	autocmd BufNewFile,Bufread *.C   setfiletype cpp
 	autocmd BufNewFile,Bufread *.F setfiletype fortran
 ]])
-  print("cxconfig loaded")
+  local logging = opts.logging
+  if logging then
+    print("cxconfig loaded")
+  end
 end
 
 return {
