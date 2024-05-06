@@ -1,0 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    selene.toml                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: chenxu <chenxu@mail.ustc.edu.cn>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/29 01:07:08 by chenxu            #+#    #+#              #
+#    Updated: 2024/05/04 21:47:51 by chenxu           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+std="lua51+vim"
+
+[lints]
+mixed_table = "allow"
+multiple_statements = "allow"
+# undefined_global = "allow"
+
+[rules]
+global_usage = "allow"
+if_same_then_else = "allow"
+incorrect_standard_library_use = "allow"
+mixed_table = "allow"
+multiple_statements = "allow"
