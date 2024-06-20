@@ -3,6 +3,8 @@ local function setup(opts)
   local sysname = vim.loop.os_uname().sysname
   if sysname == "Darwin" then
     vim.g.python_host_prog = "/opt/homebrew/bin/python3"
+    vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
+    vim.g.ruby_host_prog = "/opt/homebrew/opt/ruby/bin/ruby"
   else
     vim.g.python_host_prog = "/opt/bin/python3"
   end
