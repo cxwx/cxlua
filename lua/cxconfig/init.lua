@@ -33,9 +33,9 @@ local function setup(opts)
   opt.history = 1000 -- number of commands to remember in a history table
   local adir = vim.loop.os_homedir() .. "/history/vim/"
   opt.backup = true
-  opt.backupdir = adir .. "/backupdir"
-  opt.directory = adir .. "/directory"
-  opt.undodir = adir .. "/undodir"
+  opt.backupdir = adir .. "backupdir"
+  opt.directory = adir .. "directory"
+  opt.undodir = adir .. "undodir"
   opt.undofile = true
 
   opt.fileencodings = "utf-8,GBK,gb18030,ucs-bom,cp936,euc_JP"
