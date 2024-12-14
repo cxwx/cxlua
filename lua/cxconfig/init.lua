@@ -1,4 +1,15 @@
 -- cspell:disable
+
+local function is_github_pattern(str)
+    return vim.fn.match(str, "\\v^[[:alnum:]_.-]+/[[:alnum:]_.-]+$") > -1
+end
+-- local function lazyupdate(str)
+--   if(is_github_pattern(str))
+--
+--   else
+--     require(lazy).update(str)
+--       end
+-- end
 local function setup(opts)
   local sysname = vim.loop.os_uname().sysname
   if sysname == "Darwin" then
@@ -22,8 +33,10 @@ local function setup(opts)
   opt.breakindent = true -- wrap indent to match  line start
   opt.preserveindent = true -- preserve indent structure as much as possible
 
+  opt.cursorline = true
+
   vim.keymap.set("n", "<F6>", ":set relativenumber!<CR>")
-  vim.keymap.set('n', "<F3>", '<cmd>w<CR><cmd>!root %<CR>')
+  -- vim.keymap.set('n', "<F3>", '<cmd>w<CR><cmd>!root %<CR>') -- mv to greyjoy
 
   vim.keymap.set("n", "<leader>1", ":buffer 1<CR>")
   vim.keymap.set("n", "<leader>2", ":buffer 2<CR>")
