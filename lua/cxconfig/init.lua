@@ -3,13 +3,6 @@
 local function is_github_pattern(str)
     return vim.fn.match(str, "\\v^[[:alnum:]_.-]+/[[:alnum:]_.-]+$") > -1
 end
--- local function lazyupdate(str)
---   if(is_github_pattern(str))
---
---   else
---     require(lazy).update(str)
---       end
--- end
 local function setup(opts)
   local sysname = vim.loop.os_uname().sysname
   if sysname == "Darwin" then
@@ -36,7 +29,6 @@ local function setup(opts)
   opt.cursorline = true
 
   vim.keymap.set("n", "<F6>", ":set relativenumber!<CR>")
-  -- vim.keymap.set('n', "<F3>", '<cmd>w<CR><cmd>!root %<CR>') -- mv to greyjoy
 
   vim.keymap.set("n", "<leader>1", ":buffer 1<CR>")
   vim.keymap.set("n", "<leader>2", ":buffer 2<CR>")
@@ -53,17 +45,13 @@ local function setup(opts)
 
   opt.fileencodings = "utf-8,GBK,gb18030,ucs-bom,cp936,euc_JP"
 
-  vim.cmd([[
-	autocmd BufNewFile,Bufread *.icc setfiletype cpp
-	autocmd BufNewFile,Bufread *.C   setfiletype cpp
-	autocmd BufNewFile,Bufread *.F setfiletype fortran
-]])
+  -- local bufname = vim.api.nvim_buf_get_name(0)
+  -- local ext = bufname:match("^.+(%..+)$") or ""
+  -- if ext == ".icc" then vim.bo.filetype = "cpp" end
+  vim.cmd([[ autocmd BufNewFile,Bufread *.icc setfiletype cpp ]])
+
   local logging = opts.logging
-  if logging then
-    print("cxconfig loaded")
-  end
+  if logging then print("cxconfig loaded") end
 end
 
-return {
-  setup = setup,
-}
+return { setup = setup }
