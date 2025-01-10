@@ -1,5 +1,19 @@
--- cspell:disable
+-- ************************************************************************** --
+--                                                                            --
+--                                                        :::      ::::::::   --
+--   init.lua                                           :+:      :+:    :+:   --
+--                                                    +:+ +:+         +:+     --
+--   By: chenxu <chenxu@mail.ustc.edu.cn>           +#+  +:+       +#+        --
+--                                                +#+#+#+#+#+   +#+           --
+--   Created: 2024/10/07 01:30:43 by chenxu            #+#    #+#             --
+--   Updated: 2025/01/07 01:31:27 by chenxu           ###   ########.fr       --
+--                                                                            --
+-- ************************************************************************** --
 
+-- cspell:disable
+-- luacheck: ignore is_github_pattern
+
+---@diagnostic disable-next-line: unused-local, unused-function
 local function is_github_pattern(str)
     return vim.fn.match(str, "\\v^[[:alnum:]_.-]+/[[:alnum:]_.-]+$") > -1
 end
@@ -9,8 +23,8 @@ local function setup(opts)
     vim.g.python_host_prog = "/opt/homebrew/bin/python3"
     vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
     vim.g.ruby_host_prog = os.getenv("HOME") .. "/software/gempath/bin/neovim-ruby-host"
-  else
-    vim.g.python_host_prog = "/opt/bin/python3"
+  -- else
+    -- vim.g.python_host_prog = "/opt/bin/python3"
   end
 
   local opt = vim.opt
@@ -28,15 +42,16 @@ local function setup(opts)
 
   opt.cursorline = true
 
-  vim.keymap.set("n", "<F6>", ":set relativenumber!<CR>")
+  -- to snacks
+  -- vim.keymap.set("n", "<F6>", ":set relativenumber!<CR>")
 
   vim.keymap.set("n", "<leader>1", ":buffer 1<CR>")
   vim.keymap.set("n", "<leader>2", ":buffer 2<CR>")
   vim.keymap.set("n", "<leader>3", ":buffer 3<CR>")
-  vim.keymap.set("n", "<leader>4", ":buffer 4<CR>")
 
   opt.history = 1000 -- number of commands to remember in a history table
-  local adir = vim.loop.os_homedir() .. "/history/vim/"
+  -- local adir = vim.loop.os_homedir() .. "/history/vim/"
+  local adir = vim.fn.expand("~/history/vim/")
   opt.backup = true
   opt.backupdir = adir .. "backupdir"
   opt.directory = adir .. "directory"
@@ -45,10 +60,8 @@ local function setup(opts)
 
   opt.fileencodings = "utf-8,GBK,gb18030,ucs-bom,cp936,euc_JP"
 
-  -- local bufname = vim.api.nvim_buf_get_name(0)
-  -- local ext = bufname:match("^.+(%..+)$") or ""
-  -- if ext == ".icc" then vim.bo.filetype = "cpp" end
-  vim.cmd([[ autocmd BufNewFile,Bufread *.icc setfiletype cpp ]])
+  -- vim.cmd([[ autocmd BufNewFile,Bufread *.icc setfiletype cpp ]])
+  vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, { pattern = "*.icc", callback = function() vim.bo.filetype = "cpp" end })
 
   local logging = opts.logging
   if logging then print("cxconfig loaded") end
